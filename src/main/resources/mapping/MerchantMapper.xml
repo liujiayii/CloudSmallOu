@@ -186,4 +186,13 @@
       `order_time` = #{order_time,jdbcType=TIMESTAMP}
     where `id` = #{id,jdbcType=BIGINT}
   </update>
+  <select id="showMerchant" resultMap="BaseResultMap">
+    SELECT * FROM t_merchant ORDER BY time DESC
+  </select>
+  <update id="updateMerStatus" parameterType="java.lang.Long">
+    UPDATE t_merchant SET status = CASE WHEN status = 0 THEN 1 WHEN status = 1 THEN 0 ELSE status END WHERE id = #{merId}
+  </update>
+  <update id="updateFirstShow" parameterType="java.lang.Long">
+    UPDATE t_merchant SET first_show = CASE WHEN first_show = 0 THEN 1 WHEN first_show = 1 THEN 0 ELSE first_show END  WHERE id = #{merId}
+  </update>
 </mapper>

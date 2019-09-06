@@ -20,7 +20,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.1.119/test2" userId="root" password="root">
+                        connectionURL="jdbc:mysql://192.168.1.230/cloud_small_ou" userId="root" password="123456">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -33,7 +33,7 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.yqwl.mapping"
+        <sqlMapGenerator targetPackage="com.yqwl.dao"
                          targetProject="./src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -55,7 +55,7 @@
             </table> -->
 
 
-        <table tableName="t_pay" domainObjectName="Pay"
+        <table tableName="t_brand" domainObjectName="Brand"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" delimitAllColumns="true" delimitIdentifiers="true">
