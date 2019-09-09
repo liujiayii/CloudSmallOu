@@ -214,7 +214,8 @@
     where `id` = #{id,jdbcType=BIGINT}
   </update>
   <select id="showListNewsTrend" resultMap="BaseResultMap">
-    SELECT * FROM t_news_trends ORDER BY order_time DESC;
+    SELECT <include refid="Base_Column_List" />,
+    <include refid="Blob_Column_List" /> FROM t_news_trends ORDER BY order_time DESC;
   </select>
   <update id="updateStatusById" parameterType="java.lang.Long">
     update t_news_trends SET status = CASE WHEN status = 0 THEN 1 WHEN status=1 THEN 0 ELSE status END where id = #{newsId}
@@ -222,4 +223,31 @@
   <update id="updateFirstShowById" parameterType="java.lang.Long">
     update t_news_trends SET first_show = CASE WHEN first_show = 0 THEN 1 WHEN first_show=1 THEN 0 ELSE first_show END where id = #{newsId}
   </update>
+
+  <select id="homePage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from `t_news_trends`
+    where `first_show` = 1
+    order by `order_time` desc
+    limit 4
+  </select>
+  <select id="listByColumnProgramaId" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from `t_news_trends`
+    where `first_show` = 1 and `column_programa_id` = #{i}
+    order by `order_time` desc
+    limit 3
+  </select>
+  <select id="showFrontNewsTrend" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />,
+    <include refid="Blob_Column_List" /> FROM t_news_trends WHERE status = 1 and first_show = 1 ORDER BY order_time DESC;
+  </select>
+
 </mapper>

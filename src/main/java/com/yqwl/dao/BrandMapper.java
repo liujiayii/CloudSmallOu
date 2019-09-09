@@ -59,4 +59,6 @@ public interface BrandMapper {
     List<Brand> frontListAll();
 
     List<Brand> findAll();
+
+    List<Brand> homePage();
 }

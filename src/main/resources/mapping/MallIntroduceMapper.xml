@@ -152,4 +152,8 @@
     select <include refid="Base_Column_List" />,
     <include refid="Blob_Column_List" /> from t_mall_introduce
   </select>
+  <select id="showFrontMallIntroduce" resultType="com.yqwl.pojo.MallIntroduce">
+    select <include refid="Base_Column_List" />,
+    <include refid="Blob_Column_List" /> from t_mall_introduce WHERE id = 1
+  </select>
 </mapper>

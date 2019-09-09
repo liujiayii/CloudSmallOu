@@ -66,4 +66,11 @@ public interface NewsTrendsMapper {
     Integer updateStatusById(Long newsId);
 
     Integer updateFirstShowById(Long newsId);
+
+    List<NewsTrends> homePage();
+
+    List<NewsTrends> listByColumnProgramaId(int i);
+
+    List<NewsTrends> showFrontNewsTrend();
+
 }

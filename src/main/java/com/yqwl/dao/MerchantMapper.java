@@ -66,4 +66,9 @@ public interface MerchantMapper {
     Integer updateMerStatus(Long merId);
 
     Integer updateFirstShow(Long merId);
+
+    List<Merchant> homePage();
+
+    List<Merchant> showFrontMerchant();
+
 }

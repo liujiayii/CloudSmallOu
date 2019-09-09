@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * 商户介绍控制层
  * @author LiuHangjing
@@ -31,9 +33,7 @@ public class MerchantController extends BaseController {
         this.merchantService = merchantService;
     }
     /**
-     * 分页查询商户介绍
-     * @return
-     * @exception 
+     * 后台-分页查询商户介绍
      * @author liuhangjing
      * @date 2019/9/5 15:14e
      */
@@ -48,9 +48,7 @@ public class MerchantController extends BaseController {
         }
     }
     /**
-     * 添加商户简介
-     * @return
-     * @exception
+     * 后台-添加商户简介
      * @author liuhangjing
      * @date 2019/9/5 15:19e
      */
@@ -65,9 +63,7 @@ public class MerchantController extends BaseController {
         }
     }
     /**
-     * 修改商户简介
-     * @return
-     * @exception
+     * 后台-修改商户简介
      * @author liuhangjing
      * @date 2019/9/5 15:19e
      */
@@ -82,9 +78,7 @@ public class MerchantController extends BaseController {
         }
     }
     /**
-     * 删除商户简介
-     * @return
-     * @exception
+     * 后台-删除商户简介
      * @author liuhangjing
      * @date 2019/9/5 15:24e
      */
@@ -100,9 +94,7 @@ public class MerchantController extends BaseController {
 
     }
     /**
-     * 修改商户上下架状态
-     * @return
-     * @exception
+     * 后台-修改商户上下架状态
      * @author liuhangjing
      * @date 2019/9/5 15:28e
      */
@@ -117,9 +109,7 @@ public class MerchantController extends BaseController {
         }
     }
     /**
-     * 修改商户是否在前台显示
-     * @return
-     * @exception
+     * 后台-修改商户是否在前台显示
      * @author liuhangjing
      * @date 2019/9/5 15:37e
      */
@@ -129,6 +119,22 @@ public class MerchantController extends BaseController {
         try {
             Integer num = merchantService.updateFirstShow(merId);
             return dealSuccessResult("修改成功",num);
+        } catch (BizException e) {
+            return dealException(-200,"系统异常",e);
+        }
+    }
+    
+    /**
+     * 前台-显示商户介绍等
+     * @author liuhangjing
+     * @date 2019/9/9 11:20e
+     */
+    @RequestMapping(value = "showFrontMerchant",method = RequestMethod.POST,produces = Constants.HTML_PRODUCE_TYPE)
+    @ResponseBody
+    public String showFrontMerchant(){
+        try {
+            List<Merchant> merchantList = merchantService.showFrontMerchant();
+            return dealQueryResult(merchantList,merchantList);
         } catch (BizException e) {
             return dealException(-200,"系统异常",e);
         }

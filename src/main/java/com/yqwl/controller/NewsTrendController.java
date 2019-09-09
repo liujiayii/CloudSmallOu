@@ -14,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
 /**
  * 新闻动态控制层
  * @author LiuHangjing
@@ -31,7 +34,7 @@ public class NewsTrendController extends BaseController{
     }
 
     /**
-     * 添加新闻动态
+     * 后台-添加新闻动态
      * @author liuhangjing
      * @date 2019/9/4 14:12
      */
@@ -46,7 +49,7 @@ public class NewsTrendController extends BaseController{
         }
     }
     /**
-     * 修改新闻动态
+     * 后台-修改新闻动态
      * @author liuhangjing
      * @date 2019/9/4 15:02
      */
@@ -61,7 +64,7 @@ public class NewsTrendController extends BaseController{
         }
     }
     /**
-     * 后台列表(分页)显示新闻动态
+     * 后台-列表(分页)显示新闻动态
      * @author liuhangjing
      * @date 2019/9/4 15:16
      */
@@ -76,7 +79,7 @@ public class NewsTrendController extends BaseController{
         }
     }
     /**
-     * 删除该条新闻动态(单个)
+     * 后台-删除该条新闻动态(单个)
      * @author liuhangjing
      * @date 2019/9/4 15:21e
      */
@@ -96,7 +99,7 @@ public class NewsTrendController extends BaseController{
         }
     }
     /**
-     * 批量删除新闻动态
+     * 后台-批量删除新闻动态
      * @author liuhangjing
      * @date 2019/9/4 15:31e
      */
@@ -111,9 +114,7 @@ public class NewsTrendController extends BaseController{
         }
     }
     /**
-     * 修改新闻上下架状态
-     * @return
-     * @exception
+     * 后台-修改新闻上下架状态
      * @author liuhangjing
      * @date 2019/9/4 15:52e
      */
@@ -128,9 +129,7 @@ public class NewsTrendController extends BaseController{
         }
     }
     /**
-     * 修改新闻首页是否显示
-     * @return
-     * @exception
+     * 后台-修改新闻首页是否显示
      * @author liuhangjing
      * @date 2019/9/5 13:35e
      */
@@ -144,4 +143,23 @@ public class NewsTrendController extends BaseController{
             return dealException(-200,"系统异常",e);
         }
     }
+    
+    /**
+     * 前台 -根据状态以及是否展示查询显示新闻动态
+     * @author liuhangjing
+     * @date 2019/9/9 10:38e
+     */
+    @RequestMapping(value = "showFrontNewsTrend",method = RequestMethod.POST,produces = Constants.HTML_PRODUCE_TYPE)
+    @ResponseBody
+    public String showFrontNewsTrend(){
+
+        try {
+            List<NewsTrends>  newsTrendsList = newsTrendService.showFrontNewsTrend();
+            return dealQueryResult(newsTrendsList,newsTrendsList);
+        } catch (BizException e) {
+            return dealException(-200,"系统异常",e);
+        }
+
+    }
+
 }

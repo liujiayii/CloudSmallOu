@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[5],{paSq:function(e,t,a){"use strict";var l=a("g09b");Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0,a("IzEo");var n=l(a("bx4M")),u=l(a("q1tI")),r=a("y1Nh"),d=function(){return u.default.createElement(r.PageHeaderWrapper,null,u.default.createElement(n.default,null,"hello world"))};t.default=d}}]);

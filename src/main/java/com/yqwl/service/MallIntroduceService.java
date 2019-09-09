@@ -18,4 +18,6 @@ public interface MallIntroduceService {
     Integer updateMallIntroduce(MallIntroduce mallIntroduce) throws BizException;
 
     List<MallIntroduce> showMallIntroduce() throws BizException;
+
+    MallIntroduce showFrontMallIntroduce() throws BizException;
 }

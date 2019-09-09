@@ -63,4 +63,9 @@ public class MerchantServiceImpl implements MerchantService {
     public Integer updateFirstShow(Long merId) throws BizException {
         return merchantMapper.updateFirstShow(merId);
     }
+
+    @Override
+    public List<Merchant> showFrontMerchant() throws BizException {
+        return merchantMapper.showFrontMerchant();
+    }
 }

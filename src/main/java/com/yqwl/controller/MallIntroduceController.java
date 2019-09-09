@@ -30,9 +30,7 @@ public class MallIntroduceController extends BaseController {
         this.mallIntroduceService = mallIntroduceService;
     }
     /**
-     * 查询显示商城介绍
-     * @return
-     * @exception
+     * 后台-查询显示商城介绍
      * @author liuhangjing
      * @date 2019/9/5 17:04e
      */
@@ -48,9 +46,7 @@ public class MallIntroduceController extends BaseController {
 
     }
     /**
-     * 添加商城介绍
-     * @return
-     * @exception
+     * 后台-添加商城介绍
      * @author liuhangjing
      * @date 2019/9/5 11:01e
      */
@@ -68,9 +64,7 @@ public class MallIntroduceController extends BaseController {
 
     }
     /**
-     * 修改商城介绍
-     * @return
-     * @exception
+     * 后台-修改商城介绍
      * @author liuhangjing
      * @date 2019/9/5 11:13e
      */
@@ -85,6 +79,21 @@ public class MallIntroduceController extends BaseController {
 
             return dealException(-200,"系统异常",e);
         }
+    }
 
+    /**
+     * 前台-查询商城介绍显示
+     * @author liuhangjing
+     * @date 2019/9/9 11:25e
+     */
+    @RequestMapping(value = "showFrontMallIntroduce",method = RequestMethod.POST,produces = Constants.HTML_PRODUCE_TYPE)
+    @ResponseBody
+    public String showFrontMallIntroduce(){
+        try {
+            MallIntroduce mallIntroduce = mallIntroduceService.showFrontMallIntroduce();
+            return dealQueryResult(mallIntroduce,mallIntroduce);
+        } catch (BizException e) {
+            return dealException(-200,"系统异常",e);
+        }
     }
 }

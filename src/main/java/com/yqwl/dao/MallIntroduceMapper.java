@@ -62,4 +62,6 @@ public interface MallIntroduceMapper {
     int updateByPrimaryKey(MallIntroduce record);
 
     List<MallIntroduce> showMallIntroduce();
+
+    MallIntroduce showFrontMallIntroduce();
 }

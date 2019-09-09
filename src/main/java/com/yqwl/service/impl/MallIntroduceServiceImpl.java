@@ -42,4 +42,9 @@ public class MallIntroduceServiceImpl implements MallIntroduceService {
     public List<MallIntroduce> showMallIntroduce() throws BizException {
         return mallIntroduceMapper.showMallIntroduce();
     }
+
+    @Override
+    public MallIntroduce showFrontMallIntroduce() throws BizException {
+        return mallIntroduceMapper.showFrontMallIntroduce();
+    }
 }

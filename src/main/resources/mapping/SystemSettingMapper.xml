@@ -137,8 +137,16 @@
     where `id` = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectByKey" resultMap="java.lang.String" parameterType="java.lang.String" >
-      select   <include refid="Blob_Column_List" /> from t_system_setting
+  <select id="listAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from `t_system_setting`
+  </select>
+
+  <select id="selectByKey" resultType="java.lang.String" parameterType="java.lang.String" >
+    select   <include refid="Blob_Column_List" /> from t_system_setting where keyk = #{key}
   </select>
 
 </mapper>

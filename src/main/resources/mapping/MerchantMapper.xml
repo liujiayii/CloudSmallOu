@@ -187,7 +187,10 @@
     where `id` = #{id,jdbcType=BIGINT}
   </update>
   <select id="showMerchant" resultMap="BaseResultMap">
-    SELECT * FROM t_merchant ORDER BY time DESC
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" /> FROM t_merchant ORDER BY time DESC
   </select>
   <update id="updateMerStatus" parameterType="java.lang.Long">
     UPDATE t_merchant SET status = CASE WHEN status = 0 THEN 1 WHEN status = 1 THEN 0 ELSE status END WHERE id = #{merId}
@@ -195,4 +198,18 @@
   <update id="updateFirstShow" parameterType="java.lang.Long">
     UPDATE t_merchant SET first_show = CASE WHEN first_show = 0 THEN 1 WHEN first_show = 1 THEN 0 ELSE first_show END  WHERE id = #{merId}
   </update>
+  <select id="homePage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `t_merchant`
+    where `first_show` = 1
+    order by `order_time`desc
+    limit 4
+  </select>
+  <select id="showFrontMerchant" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" /> FROM t_merchant WHERE status = 1 and first_show = 1 ORDER BY order_time DESC
+  </select>
 </mapper>

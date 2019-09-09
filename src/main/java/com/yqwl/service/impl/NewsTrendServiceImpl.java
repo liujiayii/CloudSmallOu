@@ -74,4 +74,9 @@ public class NewsTrendServiceImpl implements NewsTrendService{
     public Integer updateFirstShowById(Long newsId) throws BizException {
         return newsTrendsMapper.updateFirstShowById(newsId);
     }
+
+    @Override
+    public List<NewsTrends> showFrontNewsTrend() throws BizException {
+        return newsTrendsMapper.showFrontNewsTrend();
+    }
 }

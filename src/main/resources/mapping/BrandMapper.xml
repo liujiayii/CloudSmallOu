@@ -202,4 +202,12 @@
     where `status`=1
     order by `rank`
   </select>
+  <select id="homePage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `t_brand`
+    where `home_page`=1
+    order by `rank`
+    limit 4
+  </select>
 </mapper>
