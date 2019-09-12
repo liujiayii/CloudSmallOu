@@ -32,8 +32,6 @@ public class BackLoginController extends BaseController {
 
     /**
      * 后台登录
-     * @return
-     * @exception
      * @author liuhangjing
      * @date 2019/9/4 17:09
      */
@@ -54,8 +52,6 @@ public class BackLoginController extends BaseController {
     }
     /**
      * 退出登录
-     * @return
-     * @exception
      * @author liuhangjing
      * @date 2019/9/4 17:12e
      */
@@ -69,11 +65,14 @@ public class BackLoginController extends BaseController {
             return dealException(-200,"系统异常",e);
         }
     }
-    // 修改登录密码
+    /**
+     * 修改登录密码
+     * @author liuhangjing
+     * @date 2019/9/4 17:12e
+     */
     @RequestMapping(value = "updatePassword",method = RequestMethod.POST,produces = Constants.HTML_PRODUCE_TYPE)
     @ResponseBody
     public String updatePassword(Supervisor supervisor){
-        System.out.println(supervisor);
         try {
             Integer num = supervisorService.updatePassword(supervisor);
             return dealSuccessResult("修改成功",num);

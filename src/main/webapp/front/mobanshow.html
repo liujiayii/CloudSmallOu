@@ -25,44 +25,44 @@
 </div>
 <!-- QQ模块end -->
 <header>
-  <div class="logo"><a href="index.html"><img src="skin/images/logo.png" alt=""></a></div>
+  <div class="logo"><a href="index.html"><img src="skin/imgs/logo.png" alt=""></a></div>
   <nav>
     <ul>
       <li><a href="/front/index.html">首页</a></li>
-      <li><a class='on' href="/front/moban.html" rel='dropmenu2'>门店介绍</a></li>
-      <li><a href="/front/join.html">合作加盟</a></li>
-      <li><a href="/front/case.html">风采展示</a></li>
-      <li><a href="/front/news.html" rel='dropmenu14'>新闻资讯</a></li>
-      <li><a href='/front/about.html'><span>关于我们</span></a></li>
+      <li><a class='on' href="/front/moban.html">品牌介绍</a></li>
+      <li><a href="/front/join.html">云巅之上</a></li>
+      <li><a href="/front/case.html">走进云小讴</a></li>
+      <li><a href="/front/news.html">新闻动态</a></li>
+      <li><a href='/front/about.html'><span>联系我们</span></a></li>
     </ul>
   </nav>
 </header>
-<article style="margin: 100px 0 0;" class="detail">
-  <div class="detail_img">
-    <!-- 左侧大图 -->
-    <a href='uploads/1-1F40G13631364.jpg' target='_blank'>
-      <img src='uploads/1-1F40G13631364.jpg' width='640' alt=""/></a>
-    <br/>
-    <a href='uploads/1-1F40G13631364.jpg' target='_blank'></a>
-  </div>
-  <!-- 模版参数信息 -->
-  <div class="detail_info">
-    <ul>
-      <li><p class="title">科技风格的响应式外贸网站</p></li>
-      <li>模板编号：<span class="high">H09A</span></li>
-      <li>语言标准：<span>HTML5+CSS3 / 自适应多平台 ( PHP+MYSQL )</span></li>
-      <li>适用行业： <span>时尚/品牌 商业/外贸</span></li>
-      <li>更新时间：<span>2017-04-07</span></li>
-      <li>百度云数字市场是一个主题模板/创意作品/数 字交易平台，你可以出售最优秀的网页模板 和平面设计作品！本站全部主题模板为100% 正品模板，支持更新升级！</li>
-      <li class="show"><a href="http://www.baidu.com/" target="_blank">预览模板</a></li>
-      <li class="pay">
-        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=12345678&site=qq&menu=yes">
-          <img src="skin/images/qq.png" title="点击这里给我发消息" alt=""/>购买咨询</a>
-      </li>
-    </ul>
-  </div>
-</article>
-
+<div id="app">
+  <article style="margin: 100px 0 0;" class="detail">
+    <div class="detail_img">
+      <!-- 左侧大图 -->
+      <a :href='brand.details_img' target='_blank'>
+        <img :src='brand.details_img' width='640' alt=""/></a>
+      <br/>
+      <a :href='brand.details_img' target='_blank'></a>
+    </div>
+    <!-- 模版参数信息 -->
+    <div class="detail_info">
+      <ul>
+        <li><p class="title">{{brand.name}}</p></li>
+        <li>模板编号：<span class="high">{{brand.id}}</span></li>
+        <li>品牌愿景：<span>{{brand.vision}}</span></li>
+        <li>品牌发展：<span>{{brand.progress}}</span></li>
+        <li>{{brand.introduction}}</li>
+        <li class="show"><a href="http://www.baidu.com/" target="_blank">查看</a></li>
+        <li class="pay">
+          <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=12345678&site=qq&menu=yes">
+            <img src="skin/imgs/qq.png" title="点击这里给我发消息" alt=""/>购买咨询</a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
 <footer>
   <div class="links"><a href='http://www.17sucai.com/' target='_blank'>中文模板</a> <a href='http://www.17sucai.com/'
                                                                                    target='_blank'>响应式网站模板</a> <a
@@ -82,5 +82,36 @@
   <div class="clear"></div>
   <div class="copy">©2004-2016 版权所有.<a href="http://www.miitbeian.gov.cn" target="_blank">苏ICP12345678</a></div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script type="text/javascript">
+    let vm = new Vue({
+        el: '#app',
+        data: {brand: {}},
+        methods: {
+            getBrand() {
+                $.ajax({
+                    url: '/brand/getById',
+                    type: 'post',
+                    data: {id: this.getQueryString('id')},
+                    dataType: 'json',
+                    success: res => {
+                        if (res.code === 0) {
+                            this.brand = res.data
+                        }
+                    }
+                })
+            },
+            getQueryString(name) {
+                const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                const r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+        },
+        mounted() {
+            this.getBrand()
+        }
+    })
+</script>
 </body>
 </HTML> 

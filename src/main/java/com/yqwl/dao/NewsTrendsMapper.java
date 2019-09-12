@@ -73,4 +73,5 @@ public interface NewsTrendsMapper {
 
     List<NewsTrends> showFrontNewsTrend();
 
+    NewsTrends showNewsTrendById(Long id);
 }

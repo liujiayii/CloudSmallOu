@@ -53,4 +53,7 @@ public interface SupervisorMapper {
     int updateByPrimaryKey(Supervisor record);
 
     Supervisor findByUsernamePwd(@Param("username") String username, @Param("password") String passwords);
+
+    Supervisor findByUsername(String username);
+
 }

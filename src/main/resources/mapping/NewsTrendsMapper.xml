@@ -249,5 +249,9 @@
     <include refid="Base_Column_List" />,
     <include refid="Blob_Column_List" /> FROM t_news_trends WHERE status = 1 and first_show = 1 ORDER BY order_time DESC;
   </select>
-
+  <select id="showNewsTrendById" parameterType="java.lang.Long" resultType="com.yqwl.pojo.NewsTrends">
+    SELECT
+    <include refid="Base_Column_List" />,
+    <include refid="Blob_Column_List" /> FROM t_news_trends WHERE id=#{id}
+  </select>
 </mapper>

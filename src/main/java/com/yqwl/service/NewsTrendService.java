@@ -30,4 +30,6 @@ public interface NewsTrendService {
     Integer updateFirstShowById(Long newsId) throws BizException;
 
     List<NewsTrends> showFrontNewsTrend() throws BizException;
+
+    NewsTrends showNewsTrendById(Long id) throws BizException;
 }

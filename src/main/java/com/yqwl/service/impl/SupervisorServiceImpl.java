@@ -37,6 +37,11 @@ public class SupervisorServiceImpl implements SupervisorService{
             logger.error("用户名为空");
             throw new BizException(FastJsonUtil.getResponseJsonNotEmpty(2004, "用户名为空", null));
         }
+        Supervisor sup = supervisorMapper.findByUsername(username);
+        if (StringUtils.isEmpty(sup)){
+            logger.error("该用户不存在");
+            throw new BizException(FastJsonUtil.getResponseJsonNotEmpty(2009,"当前用户不存在",null));
+        }
         if (StringUtils.isEmpty(password)) {
             logger.error("密码为空");
             throw new BizException(FastJsonUtil.getResponseJsonNotEmpty(2001, "密码为空", null));

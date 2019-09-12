@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.yqwl.common.utils.Constants;
 
 import com.yqwl.common.utils.Pager;
+import com.yqwl.common.utils.UpdateFile;
 import com.yqwl.common.web.BaseController;
 import com.yqwl.common.web.BizException;
 import com.yqwl.pojo.NewsTrends;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -143,7 +145,20 @@ public class NewsTrendController extends BaseController{
             return dealException(-200,"系统异常",e);
         }
     }
-    
+    /**
+     * 上传图片
+     * @author liuhangjing
+     * @date 2019/9/10 14:11e
+     */
+    @ResponseBody
+    @RequestMapping(value = "uploadNewTrendImg",method = RequestMethod.POST,produces = Constants.HTML_PRODUCE_TYPE)
+    public String toUploadImg(MultipartFile file){
+        String url = UpdateFile.update(file);
+
+        return dealSuccessResult("上传成功",url);
+    }
+
+
     /**
      * 前台 -根据状态以及是否展示查询显示新闻动态
      * @author liuhangjing
@@ -161,5 +176,22 @@ public class NewsTrendController extends BaseController{
         }
 
     }
+    /**
+     * 前台-根据id查询新闻
+     * @author liuhangjing
+     * @date 2019/9/10 11:50e
+     */
+    @RequestMapping(value = "showNewsTrendById",method = RequestMethod.POST,produces = Constants.HTML_PRODUCE_TYPE)
+    @ResponseBody
+    public String showNewsTrendById(Long id){
+        try {
+            NewsTrends newsTrends = newsTrendService.showNewsTrendById(id);
+            return dealQueryResult(newsTrends,newsTrends);
+        } catch (BizException e) {
+            return dealException(-200,"系统异常",e);
+        }
+
+    }
+
 
 }

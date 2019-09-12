@@ -775,7 +775,7 @@ body {
 }
 
 .page2 {
-  background: url(../images/bg2.jpg) no-repeat center;
+  background: url(../imgs/bg2.jpg) no-repeat center;
   background-size: cover !important;
   height: 964px;
 }
@@ -990,7 +990,7 @@ body {
 }
 
 .page3 {
-  background: url(../images/bg3.jpg) repeat center;
+  background: url(../imgs/bg3.jpg) repeat center;
   height: 1040px;
 }
 
@@ -1282,7 +1282,7 @@ body {
 }
 
 .page4 {
-  background: url(../images/bg4.jpg) no-repeat center;
+  background: url(../imgs/bg4.jpg) no-repeat center;
   background-size: cover !important;
   height: 998px;
 }
@@ -1735,7 +1735,6 @@ body {
 }
 
 .page6 {
-  /*background: url(/skin/images/bg6.jpg) no-repeat center; */
   background-size: cover !important;
   height: 900px;
 }
@@ -1750,7 +1749,7 @@ body {
 }
 
 .page6 .bg {
-  background: url(../images/img50.png) repeat;
+  background: url(../imgs/img50.png) repeat;
   position: absolute;
   left: 0;
   right: 0;
@@ -1896,7 +1895,7 @@ body {
 }
 
 .gb-arrow {
-  background: url(../images/img42.png) no-repeat left center;
+  background: url(../imgs/img42.png) no-repeat left center;
   height: 47px;
   line-height: 47px;
   padding-left: 30px;
@@ -1957,7 +1956,7 @@ body {
 }
 
 .slide-wrap li .bg {
-  background: url(../images/img50.png) repeat;
+  background: url(../imgs/img50.png) repeat;
   position: absolute;
   left: 0;
   right: 0;
@@ -2542,39 +2541,39 @@ body {
 }
 
 .nav_main ul li.h0 {
-  background: url(../images/homes.png) no-repeat 10px 12px;
+  background: url(../imgs/homes.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li.h1 {
-  background: url(../images/services.png) no-repeat 10px 12px;
+  background: url(../imgs/services.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li.h2 {
-  background: url(../images/cases.png) no-repeat 10px 12px;
+  background: url(../imgs/cases.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li.h3 {
-  background: url(../images/abouts.png) no-repeat 10px 12px;
+  background: url(../imgs/abouts.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li.h4 {
-  background: url(../images/news.png) no-repeat 10px 12px;
+  background: url(../imgs/news.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li.h5 {
-  background: url(../images/Advantages.png) no-repeat 10px 12px;
+  background: url(../imgs/Advantages.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li.h6 {
-  background: url(../images/tiyans.png) no-repeat 10px 12px;
+  background: url(../imgs/tiyans.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li.h7 {
-  background: url(../images/jobs.png) no-repeat 10px 12px;
+  background: url(../imgs/jobs.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li.h8 {
-  background: url(../images/contacts.png) no-repeat 10px 12px;
+  background: url(../imgs/contacts.png) no-repeat 10px 12px;
 }
 
 .nav_main ul li div a:after {
@@ -2659,7 +2658,7 @@ a.close_menu {
   height: 48px;
   display: inline-block;
   margin-top: 20px;
-  background: url(../images/close.png) no-repeat;
+  background: url(../imgs/close.png) no-repeat;
   float: right;
   margin-right: 30px;
   -moz-transition: -moz-transform 0.5s; /* Firefox 4 */

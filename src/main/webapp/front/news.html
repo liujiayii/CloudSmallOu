@@ -25,49 +25,35 @@
 </div>
 <!-- QQ模块end -->
 <header>
-  <div class="logo"><a href="/front/index.html"><img src="/front/skin/images/logo.png" alt=""></a></div>
+  <div class="logo"><a href="/front/index.html"><img src="/front/skin/imgs/logo.png" alt=""></a></div>
   <nav>
     <ul>
       <li><a href="/front/index.html">首页</a></li>
-      <li><a href="/front/moban.html" rel='dropmenu2'>门店介绍</a></li>
-      <li><a href="/front/join.html">合作加盟</a></li>
-      <li><a href="/front/case.html">风采展示</a></li>
-      <li><a class='on' href="/front/news.html" rel='dropmenu14'>新闻资讯</a></li>
-      <li><a href='/front/about.html'><span>关于我们</span></a></li>
+      <li><a href="/front/moban.html">品牌介绍</a></li>
+      <li><a href="/front/join.html">云巅之上</a></li>
+      <li><a href="/front/case.html">走进云小讴</a></li>
+      <li><a class='on' href="/front/news.html">新闻动态</a></li>
+      <li><a href='/front/about.html'><span>联系我们</span></a></li>
     </ul>
   </nav>
-  <div class="cloud"> &nbsp;</div>
+  <div class="cloud"></div>
 </header>
-<section class="title">
-  <h3><a href="#">行业新闻</a></h3>
-  <h3><a href="#">企业动态</a></h3>
-</section>
-<section>
-  <!-- 用于放置内容的容器 -->
-  <ul class="news_list" id="news_list">
-    <li class="news_item">
-      <div class="thumb"><a href="/front/newsshow.html"><img src="/front/uploads/1-1F40G15932L2.jpg" alt=""/></a></div>
-      <p><a href="/front/newsshow.html" target="_blank">又一个百度源码演示站点</a></p>
-      <span>百度云2006年创立于深圳以网站建设、移动互联网服务为核心业务专注于创意设计和传播应用探索并实现商业价值最大化为所有谋求长远发展的企业机构贡献全力</span></li>
-    <li class="news_item">
-      <div class="thumb"><a href="/front/newsshow.html"><img src="/front/uploads/1-1F40G159155R.jpg" alt=""/></a></div>
-      <p><a href="/front/newsshow.html" target="_blank">签约金风投资控股公司官网改版项目</a></p>
-      <span>金风科技股份有限公司是中国历史最为悠久的风电设备研发及制造企业，拥有强大的研发...</span></li>
-    <li class="news_item">
-      <div class="thumb"><a href="/front/newsshow.html"><img src="/front/uploads/1-1F40G15USF.jpg" alt=""/></a></div>
-      <p><a href="/front/newsshow.html" target="_blank">签约大信会计师事务所公司官网网站建设服务</a></p>
-      <span>大信会计师事务所系由我国现代会计先行者吴英豪先生创建于1945年。由其学子——武汉...</span></li>
-    <li class="news_item">
-      <div class="thumb"><a href="/front/newsshow.html"><img src="/front/uploads/1-1F40G15T0A4.jpg" alt=""/></a></div>
-      <p><a href="/front/newsshow.html" target="_blank">签约天神娱乐股份公司网站建设服务项目</a></p>
-      <span>天神娱乐股份有限公司股票代码002354，简称天神娱乐。一直专注网页网游和移动网游的领...</span></li>
-  </ul>
-  <!-- 临时存放图片容器 -->
-  <ul id="temp" class="temp hide">
-  </ul>
-</section>
-<div id="pages">
-  <p><span class="pageinfo">共 <strong>1</strong>页<strong>4</strong>条记录</span></p>
+<div id="app">
+  <section class="title">
+    <h3 @click="active=1" :style="active===1?'font-weight: bold;':''">行业新闻</h3>
+    <h3 @click="active=2" :style="active===2?'font-weight: bold;':''">企业动态</h3>
+  </section>
+  <section>
+    <!-- 用于放置内容的容器 -->
+    <ul class="news_list" id="news_list">
+      <li v-for="item of news" class="news_item" v-if="item.column_programa_id===active">
+        <div class="thumb"><a :href="`/front/newsshow.html?id=${item.id}`"><img :src="item.img" alt=""/></a></div>
+        <p><a href="/front/newsshow.html" target="_blank">{{item.title}}</a></p>
+        <span>{{item.content}}</span>
+      </li>
+    </ul>
+    <ul id="temp" class="temp hide"></ul>
+  </section>
 </div>
 <footer>
   <div class="links"><a href='http://www.17sucai.com/' target='_blank'>中文模板</a> <a href='http://www.17sucai.com/'
@@ -88,5 +74,29 @@
   <div class="clear"></div>
   <div class="copy">©2004-2016 版权所有.<a href="http://www.miitbeian.gov.cn" target="_blank">苏ICP12345678</a></div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script type="text/javascript">
+    let vm = new Vue({
+        el: '#app',
+        data: {news: {}, active: 1},
+        methods: {
+            getBrand() {
+                $.ajax({
+                    url: '/news/showFrontNewsTrend',
+                    type: 'post',
+                    dataType: 'json',
+                    success: res => {
+                        if (res.code === 0) {
+                            this.news = res.data
+                        }
+                    }
+                })
+            },
+        },
+        mounted() {
+            this.getBrand()
+        }
+    })
+</script>
 </body>
 </HTML>

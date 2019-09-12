@@ -25,35 +25,30 @@
 </div>
 <!-- QQ模块end -->
 <header>
-  <div class="logo"><a href="index.html"><img src="skin/images/logo.png" alt=""></a></div>
+  <div class="logo"><a href="index.html"><img src="skin/imgs/logo.png" alt=""></a></div>
   <nav>
     <ul>
       <li><a href="/front/index.html">首页</a></li>
-      <li><a href="/front/moban.html" rel='dropmenu2'>门店介绍</a></li>
-      <li><a href="/front/join.html">合作加盟</a></li>
-      <li><a class='on' href="/front/case.html">风采展示</a></li>
-      <li><a href="/front/news.html" rel='dropmenu14'>新闻资讯</a></li>
-      <li><a href='/front/about.html'><span>关于我们</span></a></li>
+      <li><a href="/front/moban.html">品牌介绍</a></li>
+      <li><a href="/front/join.html">云巅之上</a></li>
+      <li><a class='on' href="/front/case.html">走进云小讴</a></li>
+      <li><a href="/front/news.html">新闻动态</a></li>
+      <li><a href='/front/about.html'><span>联系我们</span></a></li>
     </ul>
   </nav>
   <div class="cloud"> &nbsp;</div>
 </header>
-
-<section class="about ser cf">
-  <h3>CLIENTS CASE</h3>
-  <div class="case_list">
-    <div class="case_box"><img src="/front/skin/images/w04.jpg" alt=""> <a class="full" href="/front/newsshow.html"></a>
-      <p>泽田森视觉设计<br><em>摄影,广告,视频,时尚视觉设计</em></p>
+<div id="app">
+  <section class="about ser cf">
+    <h3>风采展示</h3>
+    <div class="case_list">
+      <div v-for="item of brand" class="case_box">
+        <img :src="item.picurl" alt="" />
+        <p>{{item.content}}</p>
+      </div>
     </div>
-    <div class="case_box"><img src="/front/skin/images/w08.jpg" alt=""> <a class="full" href="/front/newsshow.html"></a>
-      <p>多美诺摄影有限公司<br><em>国内各知名品牌及杂志拍摄广</em></p>
-    </div>
-  </div>
-</section>
-<div id="pages">
-  <p><span class="pageinfo">共 <strong>1</strong>页<strong>2</strong>条记录</span></p>
+  </section>
 </div>
-
 <footer>
   <div class="links"><a href='http://www.17sucai.com/' target='_blank'>中文模板</a> <a href='http://www.17sucai.com/'
                                                                                    target='_blank'>响应式网站模板</a> <a
@@ -73,5 +68,30 @@
   <div class="clear"></div>
   <div class="copy">©2004-2016 版权所有.<a href="http://www.miitbeian.gov.cn" target="_blank">苏ICP12345678</a></div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script type="text/javascript">
+    let vm = new Vue({
+        el: '#app',
+        data: {brand: {}},
+        methods: {
+            getBrand() {
+                $.ajax({
+                    url: '/elegant/queryElegantList',
+                    type: 'post',
+                    data: {page: 1, limit: 100},
+                    dataType: 'json',
+                    success: res => {
+                        if (res.code === 0) {
+                            this.brand = res.data
+                        }
+                    }
+                })
+            },
+        },
+        mounted() {
+            this.getBrand()
+        }
+    })
+</script>
 </body>
 </HTML>
