@@ -35,9 +35,9 @@ public class HomePageServiceImpl implements HomePageService {
         homePage.setIntroduce(introduceMapper.introduce());
         homePage.setMerchant(merchantMapper.homePage());
         Map<String,Object> map = new HashMap<>();
-        map.put("1",newsTrendsMapper.homePage());
-        map.put("2",newsTrendsMapper.listByColumnProgramaId(1));
-        map.put("3",newsTrendsMapper.listByColumnProgramaId(2));
+        map.put("A",newsTrendsMapper.homePage());
+        map.put("B",newsTrendsMapper.listByColumnProgramaId(1));
+        map.put("C",newsTrendsMapper.listByColumnProgramaId(2));
         homePage.setNewsTrends(map);
         homePage.setSystemSetting(systemSettingMapper.listAll());
         return homePage;

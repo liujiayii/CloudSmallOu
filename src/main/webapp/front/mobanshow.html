@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="baidu-site-verification" content="RBzbiIZZPU"/>
   <link rel="icon" href="/favicon.ico">
-  <title>创意模板-高端html5网络建站公司源码 H5高逼格网络工作室设计类织梦模板</title>
+  <title>云小讴</title>
   <link href="skin/style/originality.css" rel="stylesheet">
   <script type="text/javascript" src="skin/js/jquery1.7.js"></script>
   <script type="text/javascript" src="skin/js/para.js"></script>
@@ -50,43 +50,76 @@
     <div class="detail_info">
       <ul>
         <li><p class="title">{{brand.name}}</p></li>
-        <li>模板编号：<span class="high">{{brand.id}}</span></li>
+        <li>品牌编号：<span class="high">{{brand.id}}</span></li>
         <li>品牌愿景：<span>{{brand.vision}}</span></li>
         <li>品牌发展：<span>{{brand.progress}}</span></li>
         <li>{{brand.introduction}}</li>
-        <li class="show"><a href="http://www.baidu.com/" target="_blank">查看</a></li>
+        <li class="show" @click="productShow=!productShow"><a>查看</a></li>
         <li class="pay">
-          <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=12345678&site=qq&menu=yes">
+          <a target="_blank"
+             :href=`http://wpa.qq.com/msgrd?v=3&amp;uin=${homeInfo.introduce.qQ}&amp;site=qq&amp;menu=yes&amp;q=7`>
             <img src="skin/imgs/qq.png" title="点击这里给我发消息" alt=""/>购买咨询</a>
         </li>
       </ul>
     </div>
   </article>
+  <article v-for="item of brand.products" v-show="productShow" style="margin: 100px 0 0;" class="detail">
+    <div class="detail_img">
+      <!-- 左侧大图 -->
+      <a :href='item.img' target='_blank'>
+        <img :src='item.img' width='640' alt=""/></a>
+      <br/>
+      <a :href='item.img' target='_blank'></a>
+    </div>
+    <!-- 模版参数信息 -->
+    <div class="detail_info">
+      <ul>
+        <li><p class="title">{{item.name}}</p></li>
+        <li>产品编号：<span class="high">{{item.id}}</span></li>
+        <li>产品名称：<span>{{item.name}}</span></li>
+        <li>{{item.introduce}}</li>
+        <li class="pay">
+          <a target="_blank"
+             :href=`http://wpa.qq.com/msgrd?v=3&amp;uin=${homeInfo.introduce.qQ}&amp;site=qq&amp;menu=yes&amp;q=7`>
+            <img src="skin/imgs/qq.png" title="点击这里给我发消息" alt=""/>购买咨询</a>
+        </li>
+      </ul>
+    </div>
+  </article>
+  <footer>
+    <div class="links">
+      <a href='./index.html'>首页</a>
+      <a href='./moban.html'>品牌介绍</a>
+    </div>
+    <div class="links">
+      <a href="./join.html">云巅之上</a><a href="./case.html">走进云小讴</a>
+    </div>
+    <div class="links news">
+      <a href="./news.html">新闻动态</a><a href="./about.html">联系我们</a>
+    </div>
+    <div class="qr" :style="`background-image:url(${homeInfo.introduce.qR_code})`"></div>
+    <div class="contactc">
+      <ul>
+        <li><a
+          :href=`http://wpa.qq.com/msgrd?v=3&amp;uin=${homeInfo.introduce.qQ}&amp;site=qq&amp;menu=yes&amp;q=7`
+          target="_blank" t>在线QQ服务/咨询</a>
+        </li>
+        <li><a href="#">{{homeInfo.introduce.e_mail}}</a></li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="copy" v-for="item of homeInfo.systemSetting" v-if="item.keyk==='company_bah'">{{item.valuek}}</div>
+  </footer>
 </div>
-<footer>
-  <div class="links"><a href='http://www.17sucai.com/' target='_blank'>中文模板</a> <a href='http://www.17sucai.com/'
-                                                                                   target='_blank'>响应式网站模板</a> <a
-    href='http://www.17sucai.com/' target='_blank'>网站源码</a> <a href='http://www.17sucai.com/' target='_blank'>手机模板</a>
-  </div>
-  <div class="links"><a href="#">精选案例</a><a href="#">合作加盟</a><a href="#">关于我们</a></div>
-  <div class="links news"><a href="#">摄影艺术</a><a href="#">集团模板</a><a href="#">新闻博客</a></div>
-  <div class="qr"></div>
-  <div class="contactc">
-    <ul>
-      <li><a
-        href="javascript:window.open('http://wpa.qq.com/msgrd?v=3&amp;uin=12345678&amp;site=qq&amp;menu=yes&amp;q=7', '_blank', 'height=544, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');">在线QQ服务/咨询</a>
-      </li>
-      <li><a href="#">12345678@qq.com</a></li>
-    </ul>
-  </div>
-  <div class="clear"></div>
-  <div class="copy">©2004-2016 版权所有.<a href="http://www.miitbeian.gov.cn" target="_blank">苏ICP12345678</a></div>
-</footer>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script type="text/javascript">
     let vm = new Vue({
         el: '#app',
-        data: {brand: {}},
+        data: {
+            brand: {products: []},
+            homeInfo: {introduce: {}, newsTrends: {}, merchant: {}, brands: {}},
+            productShow: false
+        },
         methods: {
             getBrand() {
                 $.ajax({
@@ -106,10 +139,23 @@
                 const r = window.location.search.substr(1).match(reg);
                 if (r != null) return unescape(r[2]);
                 return null;
-            }
+            },
+            getHomeInfo() {
+                $.ajax({
+                    url: '/main/homePage',
+                    type: 'post',
+                    dataType: 'json',
+                    success: res => {
+                        if (res.code === 0) {
+                            this.homeInfo = res.data
+                        }
+                    }
+                })
+            },
         },
         mounted() {
-            this.getBrand()
+            this.getBrand();
+            this.getHomeInfo()
         }
     })
 </script>

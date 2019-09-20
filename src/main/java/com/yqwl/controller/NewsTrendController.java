@@ -1,15 +1,16 @@
 package com.yqwl.controller; /**
  * Created by Administrator on 2019/9/4.
  */
+
 import com.github.pagehelper.PageInfo;
 import com.yqwl.common.utils.Constants;
-
 import com.yqwl.common.utils.Pager;
 import com.yqwl.common.utils.UpdateFile;
 import com.yqwl.common.web.BaseController;
 import com.yqwl.common.web.BizException;
 import com.yqwl.pojo.NewsTrends;
 import com.yqwl.service.NewsTrendService;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -152,9 +160,23 @@ public class NewsTrendController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value = "uploadNewTrendImg",method = RequestMethod.POST,produces = Constants.HTML_PRODUCE_TYPE)
-    public String toUploadImg(MultipartFile file){
-        String url = UpdateFile.update(file);
-
+    public String toUploadImg(MultipartFile file,Integer height,Integer width){
+        String originalFilename = file.getOriginalFilename();
+        InputStream is = null;
+        String fileEnd = null;
+        try {
+            fileEnd = FilenameUtils.getExtension(originalFilename);
+            BufferedInputStream in = new BufferedInputStream(file.getInputStream());
+            Image bi = ImageIO.read(in);
+            BufferedImage tag = new BufferedImage(width,height, BufferedImage.TYPE_INT_RGB);
+            tag.getGraphics().drawImage(bi, 0, 0, width, height, null);
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(tag, fileEnd, os);
+            is = new ByteArrayInputStream(os.toByteArray());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        String url = UpdateFile.update(is,fileEnd);
         return dealSuccessResult("上传成功",url);
     }
 

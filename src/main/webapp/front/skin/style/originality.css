@@ -955,6 +955,10 @@ p.banner_p span {
   font-size: 15px;
   color: #666;
   line-height: 26px;
+  height: 26px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .news_detail {
@@ -1159,7 +1163,7 @@ p.banner_p span {
 }
 
 .join_ser_box {
-  width: 25%;
+  /*width: 25%;*/
   float: left;
   padding: 10px 20px;
 }
@@ -1673,7 +1677,8 @@ footer .qr, footer .contactc {
 footer .qr {
   width: 140px;
   height: 160px;
-  background-image: url(../imgs/code.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 footer .links.news {
@@ -1730,6 +1735,7 @@ footer .contactc li a:hover {
   padding-top: 20px;
   color: #999;
   font-size: 14px;
+  text-align: center;
 }
 
 .m_nav {

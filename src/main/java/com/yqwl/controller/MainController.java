@@ -1,7 +1,6 @@
 package com.yqwl.controller;
 
 import com.yqwl.common.utils.Constants;
-import com.yqwl.common.utils.UpdateFile;
 import com.yqwl.common.web.BaseController;
 import com.yqwl.service.HomePageService;
 import com.yqwl.vo.HomePage;
@@ -10,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 
 
 @Controller
@@ -22,15 +19,6 @@ public class MainController extends BaseController {
     private HomePageService homePageService;
 
 
-    @ResponseBody
-    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = Constants.HTML_PRODUCE_TYPE)
-    public String upload(MultipartFile file) {
-        try {
-            return UpdateFile.update(file);
-        } catch (Exception e) {
-            return dealException(-200, "系统异常", e);
-        }
-    }
 
     @ResponseBody
     @RequestMapping(value = "/homePage", method = RequestMethod.POST, produces = Constants.HTML_PRODUCE_TYPE)

@@ -1,19 +1,15 @@
 package com.yqwl.common.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.LifecycleRule;
 import com.aliyun.oss.model.LifecycleRule.RuleStatus;
 import com.aliyun.oss.model.SetBucketLifecycleRequest;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * 上传图片后返回路径和格式
@@ -34,10 +30,10 @@ public class UpdateFile {
 */
 	
 	private static final String endpoint = "http://oss-cn-zhangjiakou.aliyuncs.com";
-	private static final String accessKeyId = "TkY9uJmnNDl06WPM";
-	private static final String accessKeySecret = "Sl2g3FBetdkbUiXLT5gvFYcmHiu7nT";
-	private static final String bucketName = "ouyedichan";
-	private static final String picLocation = "dataImg";
+	private static final String accessKeyId = "LTAILXMrV4PXgX4z";
+	private static final String accessKeySecret = "h38zzq6DgpukdxmyTWsrWwaRaTp9v9";
+	private static final String bucketName = "ouyepuhui";
+	private static final String picLocation = "data/attachments/";
 	private static String Key = "key";
 	private static final String ruleId0 = "rule0";
 	private static final String matchPrefix0 = "A0/";
@@ -69,21 +65,18 @@ public class UpdateFile {
 	 * @author lishaozhang
 	 * @createDate 2018年11月22日
 	 */
-	public static synchronized String update(MultipartFile file) {
+	public static synchronized String update(InputStream is,String fileEnd) {
 		OSSClient ossClient = null;
 		// 获取要上传文件的输入流
-		InputStream is = null;
+
 		URL url = null;
 		try {
 			ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 			// 距最后修改时间3650天后文件删除。
 			SetBucketLifecycleRequest request = new SetBucketLifecycleRequest(bucketName);
 			request.AddLifecycleRule(new LifecycleRule(ruleId0, matchPrefix0, RuleStatus.Enabled, 3650));
-			is = file.getInputStream();
 			// 获取文件类型
-			String originalFilename = file.getOriginalFilename();
-			String fileType = originalFilename.substring(originalFilename.lastIndexOf(".")).replace(".", "");
-			Key = picLocation + UUID.randomUUID().toString().toUpperCase().replace("-", "") + "." + fileType;
+			Key = picLocation + UUID.randomUUID().toString().toUpperCase().replace("-", "") + "." + fileEnd;
 			// 设置URL过期时间为10年。
 			Date expiration = new Date(new Date().getTime() + 3600 * 1000 * 24 * 30 * 12 * 10);
 			// 生成以GET方法访问的签名URL，访客可以直接通过浏览器访问相关内容。
@@ -95,7 +88,7 @@ public class UpdateFile {
 			// map.put("Path", url.toString());
 			// map.put("suffix", fileType);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			ossClient.shutdown();

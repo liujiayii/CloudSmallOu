@@ -1,7 +1,6 @@
 package com.yqwl.controller;
 
 import com.yqwl.common.utils.Constants;
-import com.yqwl.common.utils.UpdateFile;
 import com.yqwl.common.web.BaseController;
 import com.yqwl.pojo.Elegant;
 import com.yqwl.service.ElegantService;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.management.ValueExp;
 import java.util.List;
 
 @Controller
@@ -42,17 +39,6 @@ public class ElegantController extends BaseController {
         try {
             Integer result = elegantService.insertSelective(elegant);
             return dealSuccessResult("新增成功", result);
-        }catch (Exception e){
-            return dealException(-200, "系统异常", e);
-        }
-    }
-
-    @RequestMapping(value = "uploadPic", method = RequestMethod.POST, produces = Constants.HTML_PRODUCE_TYPE)
-    @ResponseBody
-    public String uploadPic(MultipartFile file){
-        try {
-            String result = UpdateFile.update(file);
-            return dealSuccessResult("上传成功", result);
         }catch (Exception e){
             return dealException(-200, "系统异常", e);
         }

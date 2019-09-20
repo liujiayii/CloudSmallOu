@@ -135,7 +135,9 @@
             <div class="wrap">
               <div class="ico"></div>
               <h2>{{item.name}}</h2>
-              <dl><dd><img :src="item.img" alt="" width="200"></dd></dl>
+              <dl>
+                <dd><img :src="item.img" alt="" width="200"></dd>
+              </dl>
               <p class="desc">{{item.introduction}}</p>
             </div>
             <div class="img"><img :src="item.details_img" alt=""></div>
@@ -190,29 +192,30 @@
           <div class="list">
             <dl id="dl1">
               <dt>行业新闻</dt>
-              <dd v-for="(item,index) of homeInfo.newsTrends[1]">
-                <a href="/front/newsshow.html">{{index+1}}<span>/</span>{{item.title}}</a>
+              <dd v-for="(item,index) of homeInfo.newsTrends['B']">
+                <a :href="`/front/newsshow.html?id=${item.id}`">{{index+1}}<span>/</span>{{item.title}}</a>
               </dd>
             </dl>
             <dl id="dl2">
               <dt>公司动态</dt>
-              <dd v-for="(item,index) of homeInfo.newsTrends[2]">
-                <a href="/front/newsshow.html">{{index+1}}<span>/</span>{{item.title}}</a>
+              <dd v-for="(item,index) of homeInfo.newsTrends['C']">
+                <a :href="`/front/newsshow.html?id=${item.id}`">{{index+1}}<span>/</span>{{item.title}}</a>
               </dd>
             </dl>
           </div>
         </div>
         <div class="body">
           <ul class="list">
-            <li v-for="item of homeInfo.newsTrends[3]">
-              <a href="/front/newsshow.html">
+            <li v-for="item of homeInfo.newsTrends['A']">
+              <a :href="`/front/newsshow.html?id=${item.id}`">
                 <div class="view">
-                  <div class="date"><big>07</big><span>2017-04</span></div>
+                  <div class="date"><big>{{new Date(item.time).getDate()}}</big><span>{{`${new Date(item.time).getFullYear()}-${new Date(item.time).getMonth()-1}`}}</span>
+                  </div>
                   <div class="img">
                     <table>
                       <tbody>
                       <tr>
-                        <td><img :src="item.img" alt=""></td>
+                        <td><img :src="item.img" alt="" width="144" height="58"></td>
                       </tr>
                       </tbody>
                     </table>
@@ -220,7 +223,7 @@
                   <h4>{{item.title}}</h4>
                 </div>
                 <div class="mask" style="background: #9f0216 none repeat scroll 0 0;">
-                  <div class="img"><img :src="item.img" alt=""></div>
+                  <div class="img"><img :src="item.img" alt="" width="144" height="58"></div>
                   <h2>{{item.title}}</h2>
                   <hr>
                   <p v-html="item.content"></p>
@@ -265,7 +268,7 @@
           <h4>周一至周五</h4>
           </span></div>
           <div class="tele"><img src="/front/skin/imgs/img37.png" class="tel" alt="">
-            <a href="http://wpa.qq.com/msgrd?v=3&uin=12345678&site=qq&menu=yes" target="_blank">
+            <a :href="`http://wpa.qq.com/msgrd?v=3&uin=${homeInfo.introduce.qQ}&site=qq&menu=yes`" target="_blank">
               <img class="qq" src="/front/skin/imgs/img38.png" alt="">
             </a>
           </div>
@@ -276,9 +279,7 @@
           <li>{{homeInfo.introduce.wishes}}</li>
         </ul>
         <ul id="ul2">
-          <li> ©2019-2019 版权所有. 苏ICP12345678
-            <br>
-          </li>
+          <li><br></li>
         </ul>
         <ul id="ul3">
           <li v-for="item of homeInfo.systemSetting">{{item.valuek}}</li>
@@ -294,19 +295,19 @@
           <h2><a href="/front/index.html">返回首页<em>Return to Home</em></a></h2>
         </li>
         <li class="h1">
-          <h2><a href="/front/moban.html">创意模板<em>Creative</em></a></h2>
+          <h2><a href="/front/moban.html">品牌介绍<em>Creative</em></a></h2>
         </li>
         <li class="h2">
-          <h2><a href="/front/case.html">精选案例<em>Showcase</em></a></h2>
+          <h2><a href="/front/case.html">走进云小讴<em>Showcase</em></a></h2>
         </li>
         <li class="h3">
-          <h2><a href="/front/join.html">合作加盟<em>Join</em></a></h2>
+          <h2><a href="/front/join.html">云巅之上<em>Join</em></a></h2>
         </li>
         <li class="h4">
-          <h2><a href="/front/news.html">最新资讯<em>News</em></a></h2>
+          <h2><a href="/front/news.html">新闻动态<em>News</em></a></h2>
         </li>
         <li class="h5">
-          <h2><a href="/front/about.html">关于我们<em>About</em></a></h2>
+          <h2><a href="/front/about.html">联系我们<em>About</em></a></h2>
         </li>
       </ul>
       <div class="h6"></div>
@@ -315,7 +316,7 @@
   <div class="sidebar">
     <ul>
       <li>
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=12345678&site=qq&menu=yes" target="_blank"><img
+        <a :href="`http://wpa.qq.com/msgrd?v=3&uin=${homeInfo.introduce.qQ}&site=qq&menu=yes`" target="_blank"><img
           src="/front/skin/imgs/img58.png" alt=""></a>
       </li>
       <li>
